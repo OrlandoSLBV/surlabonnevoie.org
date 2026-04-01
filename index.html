@@ -827,7 +827,52 @@
 </style>
 </head>
 <body>
+<!-- Improved Language Switcher - Matches Sur la Bonne Voie green theme -->
+<div style="background-color: #f8f5f0; padding: 14px 20px; text-align: center; font-size: 15px; border-bottom: 2px solid #4A7043; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+  <strong style="color: #2C2C2C; margin-right: 12px;">Langue / Language :</strong>
+  
+  <a href="#" onclick="doGTranslate('fr|fr'); return false;" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇫🇷 Français</a>
+  <span style="color: #aaa;"> | </span>
+  <a href="#" onclick="doGTranslate('fr|en'); return false;" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇬🇧 English</a>
+  <span style="color: #aaa;"> | </span>
+  <a href="#" onclick="doGTranslate('fr|es'); return false;" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇪🇸 Español</a>
+  <span style="color: #aaa;"> | </span>
+  <a href="#" onclick="doGTranslate('fr|ar'); return false;" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇲🇦 العربية</a>
+</div>
 
+<!-- Google Translate (hidden) -->
+<div id="google_translate_element" style="display: none;"></div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'fr',
+    includedLanguages: 'en,es,ar',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script type="text/javascript">
+function doGTranslate(lang_pair) {
+  if (lang_pair === 'fr|fr') {
+    location.reload();
+    return;
+  }
+  const lang = lang_pair.split('|')[1];
+  const te = document.getElementById('google_translate_element');
+  if (te) {
+    const select = te.querySelector('select');
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event('change'));
+    }
+  }
+}
+</script>
+ 
 <!-- NAV -->
 <nav>
   <a href="#accueil" class="nav-logo">Sur la <span>bonne voie</span></a>
