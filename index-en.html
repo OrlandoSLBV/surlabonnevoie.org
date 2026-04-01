@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sur la Bonne Voie — Real Integration Support in France</title>
+<meta name="description" content="Sur la Bonne Voie supports immigrants who genuinely want to integrate in France — with practical guides on administration, language learning, and real community insertion. Based in Ardèche.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-dark: #0F6E56;
+    --green-deep: #085041;
+    --amber: #EF9F27;
+    --amber-light: #FAEEDA;
+    --dark: #1a1a18;
+    --mid: #3d3d3a;
+    --muted: #6b6b67;
+    --border: #e8e6de;
+    --bg: #faf9f6;
+    --white: #ffffff;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Lato', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--dark);
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+    padding-top: 65px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,249,246,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--dark);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--green); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-cta {
+    background: var(--green);
+    color: var(--white) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 2px;
+  }
+
+  .nav-cta:hover { background: var(--green-dark); color: var(--white) !important; }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--dark);
+    transition: all 0.3s;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--green);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: var(--white);
+    padding: 0.875rem 2rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--dark);
+    padding: 0.875rem 2rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border: 1.5px solid var(--border);
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: var(--green); color: var(--green); }
+
+  .hero-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--green);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .hero-card-quote {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-card-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* SECTIONS SHARED */
+  section { padding: 6rem 2rem; }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--green);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.85;
+    max-width: 640px;
+  }
+
+  /* MISSION */
+  .mission { background: var(--white); }
+
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+
+  .mission-values {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .value-item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .value-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .value-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.01em;
+  }
+
+  .value-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* MANIFESTO */
+  .manifesto { background: var(--dark); color: var(--white); }
+
+  .manifesto .section-label { color: var(--green); }
+  .manifesto .section-label::before { background: var(--green); }
+  .manifesto .section-title { color: var(--white); }
+
+  .manifesto-beliefs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 3rem;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .belief {
+    padding: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.3s;
+  }
+
+  .belief:hover { background: rgba(29,158,117,0.08); }
+
+  .belief-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--green);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .belief-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--white);
+    margin-bottom: 0.875rem;
+    line-height: 1.3;
+  }
+
+  .belief-text {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.75;
+  }
+
+  /* GUIDES */
+  .guides { background: var(--bg); }
+
+  .guides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .guide-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .guide-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--green);
+    transition: width 0.3s;
+  }
+
+  .guide-card:hover { border-color: var(--green); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+  .guide-card:hover::after { width: 100%; }
+
+  .guide-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 0.875rem;
+  }
+
+  .guide-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--dark);
+    line-height: 1.35;
+    margin-bottom: 0.875rem;
+  }
+
+  .guide-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .guide-link {
+    font-size: 0.8rem;
+    color: var(--green);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* POUR LES FRANÇAIS */
+  .pour-francais {
+    background: var(--green-light);
+    border-top: 1px solid rgba(29,158,117,0.15);
+    border-bottom: 1px solid rgba(29,158,117,0.15);
+  }
+
+  .francais-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .francais-quote {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--green-deep);
+    border-left: 3px solid var(--green);
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .francais-body {
+    font-size: 1rem;
+    color: var(--green-dark);
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+  }
+
+  .francais-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .francais-action {
+    background: var(--white);
+    border: 1px solid rgba(29,158,117,0.2);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .action-icon {
+    width: 8px;
+    height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .action-text {
+    font-size: 0.9rem;
+    color: var(--green-dark);
+    line-height: 1.6;
+  }
+
+  .action-text strong { color: var(--green-deep); font-weight: 700; }
+
+  /* NOTRE HISTOIRE */
+  .histoire { background: var(--white); }
+
+  .histoire-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+
+  .histoire-sidebar {
+    position: sticky;
+    top: 5rem;
+  }
+
+  .histoire-sidebar-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .histoire-tag {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.875rem;
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .histoire-content p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .histoire-content p strong { color: var(--dark); font-weight: 700; }
+
+  .histoire-pull {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--dark);
+    border-left: 3px solid var(--green);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    line-height: 1.65;
+  }
+
+  /* CONTACT */
+  .contact { background: var(--dark); }
+
+  .contact .section-label { color: var(--green); }
+  .contact .section-label::before { background: var(--green); }
+  .contact .section-title { color: var(--white); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+
+  .contact-desc {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.85;
+    margin-bottom: 2rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .contact-item-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    font-weight: 700;
+    min-width: 80px;
+  }
+
+  .contact-item-val {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.5);
+    font-weight: 700;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--white);
+    padding: 0.875rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--green); }
+
+  .form-group select option { background: var(--dark); color: var(--white); }
+
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  .form-submit {
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+  }
+
+  .form-submit:hover { background: var(--green-dark); }
+
+  .form-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #111110;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .footer-logo span { color: var(--green); }
+
+  .footer-tagline {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 0.25rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--green); }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.2);
+    width: 100%;
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    margin-top: 1rem;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--bg);
+      padding: 2rem;
+      border-bottom: 1px solid var(--border);
+      gap: 1.5rem;
+      z-index: 99;
+    }
+    .nav-toggle { display: flex; }
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-card { display: none; }
+    .mission-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .manifesto-beliefs { grid-template-columns: 1fr; }
+    .guides-grid { grid-template-columns: 1fr 1fr; }
+    .francais-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .histoire-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .histoire-sidebar { position: static; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 4rem 1.25rem; }
+    .guides-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Language Switcher -->
+<div style="background-color: #f8f5f0; padding: 14px 20px; text-align: center; font-size: 15px; border-bottom: 2px solid #4A7043; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+  <strong style="color: #2C2C2C; margin-right: 12px;">Language :</strong>
+  
+  <a href="index.html" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇫🇷 Français</a>
+  <span style="color: #aaa;"> | </span>
+  <a href="index-en.html" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇬🇧 English</a>
+  <span style="color: #aaa;"> | </span>
+  <a href="index-es.html" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇪🇸 Español</a>
+  <span style="color: #aaa;"> | </span>
+  <a href="index-ar.html" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇲🇦 العربية</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#accueil" class="nav-logo">Sur la <span>bonne voie</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#mission">Our Mission</a></li>
+    <li><a href="#guides">Guides</a></li>
+    <li><a href="#francais">For the French</a></li>
+    <li><a href="#histoire">Our Story</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-inner">
+    <div class="fade-up">
+      <div class="hero-label">Aubenas, Ardèche — France</div>
+      <h1>Integration starts with <em>one decision.</em></h1>
+      <p class="hero-desc">Sur la Bonne Voie supports immigrants who genuinely want to integrate in France — and helps French people understand and welcome those who do things the right way.</p>
+      <div class="hero-actions">
+        <a href="#guides" class="btn-primary">See our guides</a>
+        <a href="#contact" class="btn-secondary">Contact us</a>
+      </div>
+    </div>
+    <div class="hero-card fade-up" style="transition-delay:0.2s">
+      <p class="hero-card-quote">"Integration is not a form to fill out. It is a relationship to build — and a decision to make, once and firmly."</p>
+      <p class="hero-card-meta">Sur la Bonne Voie — Manifesto</p>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">6</div>
+          <div class="stat-label">Practical guides</div>
+        </div>
+        <div>
+          <div class="stat-num">07</div>
+          <div class="stat-label">Ardèche — local</div>
+        </div>
+        <div>
+          <div class="stat-num">2</div>
+          <div class="stat-label">Audiences served</div>
+        </div>
+        <div>
+          <div class="stat-num">0€</div>
+          <div class="stat-label">Always free</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="section-inner">
+    <div class="section-label">Our Mission</div>
+    <h2 class="section-title fade-up">Not like the other associations.</h2>
+    <p class="section-body fade-up">We help those who want to do things right — with responsibility, respect, and a real desire to integrate into French society.</p>
+    <div class="mission-grid">
+      <div class="section-body fade-up" style="transition-delay:0.1s">
+        <p style="margin-bottom:1.5rem;">Sur la Bonne Voie was born from direct experience with the French system — its strengths, its flaws, and what nobody tells you when you arrive. We share what we have learned, for free, so others can move faster and more surely.</p>
+        <p>Our approach is simple: <strong style="color:var(--dark)">practical knowledge, real examples, and truth without filters.</strong></p>
+      </div>
+      <div class="mission-values fade-up" style="transition-delay:0.2s">
+        <div class="value-item">
+          <div class="value-dot"></div>
+          <div>
+            <div class="value-title">Responsibility before rights</div>
+            <div class="value-desc">Integration is earned through action. We help those who show up.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot"></div>
+          <div>
+            <div class="value-title">Lived experience only</div>
+            <div class="value-desc">Every piece of advice comes from someone who has lived it — not from a manual.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot"></div>
+          <div>
+            <div class="value-title">Mutual respect</div>
+            <div class="value-desc">We respect France, its laws and its culture. We ask for the same in return.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-dot"></div>
+          <div>
+            <div class="value-title">No gray areas</div>
+            <div class="value-desc">We call things by their name. Real integration looks like something specific.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifeste">
+  <div class="section-inner">
+    <div class="section-label">What we believe</div>
+    <h2 class="section-title fade-up">Our manifesto — no filters.</h2>
+    <div class="manifesto-beliefs">
+      <div class="belief fade-up">
+        <div class="belief-num">01</div>
+        <div class="belief-title">Thinking clearly is not racism.</div>
+        <div class="belief-text">Calling things by their name is not an act of hate — it is an act of respect toward those who do things right. Refusing this clarity means abandoning honest people.</div>
+      </div>
+      <div class="belief fade-up" style="transition-delay:0.1s">
+        <div class="belief-num">02</div>
+        <div class="belief-title">Nothing is free. Nothing is impossible.</div>
+        <div class="belief-text">Neither papers, nor work, nor friendships, nor trust. Everything must be earned. Everything must be built. But nothing is impossible if you put in the necessary effort.</div>
+      </div>
+      <div class="belief fade-up" style="transition-delay:0.1s">
+        <div class="belief-num">03</div>
+        <div class="belief-title">France owes you nothing. You owe everything to France.</div>
+        <div class="belief-text">Coming to France is a chance. In return, the immigrant owes France gratitude, respect, and a promise that his presence will make this country better.</div>
+      </div>
+      <div class="belief fade-up" style="transition-delay:0.2s">
+        <div class="belief-num">04</div>
+        <div class="belief-title">The past explains. It does not excuse.</div>
+        <div class="belief-text">We live in 2026, not in 1926. There is only one reality — no matter how you feel about it, it does not change. What changes is what you decide to do with it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDES -->
+<section class="guides" id="guides">
+  <div class="section-inner">
+    <div class="section-label">Practical Guides</div>
+    <h2 class="section-title fade-up">What official websites won't tell you.</h2>
+    <p class="section-body fade-up">Guides written by people who have lived the process — not theories, not legal texts. The reality on the ground, the advice nobody shares, and the mistakes to avoid.</p>
+    <div class="guides-grid">
+      <a href="guides/asile-en-france.pdf" target="_blank" class="guide-card fade-up">
+        <div class="guide-tag">Administration</div>
+        <div class="guide-title">How asylum works in France</div>
+        <div class="guide-desc">The complete step-by-step process — with what nobody tells you at each stage.</div>
+        <div class="guide-link">Read the guide →</div>
+      </a>
+      <a href="guides/titre-de-sejour.pdf" target="_blank" class="guide-card fade-up" style="transition-delay:0.1s">
+        <div class="guide-tag">Administration</div>
+        <div class="guide-title">Residence permit — your real options</div>
+        <div class="guide-desc">All available pathways, including the new 2024 laws on shortage occupations.</div>
+        <div class="guide-link">Read the guide →</div>
+      </a>
+      <a href="guides/apprendre-le-francais.pdf" target="_blank" class="guide-card fade-up" style="transition-delay:0.2s">
+        <div class="guide-tag">Language</div>
+        <div class="guide-title">Learning French — the method that works</div>
+        <div class="guide-desc">From zero to B2+ as a self-learner. The tools, the method, and the truth nobody tells you.</div>
+        <div class="guide-link">Read the guide →</div>
+      </a>
+      <a href="guides/integration-sociale.pdf" target="_blank" class="guide-card fade-up">
+        <div class="guide-tag">Integration</div>
+        <div class="guide-title">Social integration — the method nobody teaches</div>
+        <div class="guide-desc">How to build a real network from zero — without contacts, without language, without money.</div>
+        <div class="guide-link">Read the guide →</div>
+      </a>
+      <a href="guides/trouver-un-logement.pdf" target="_blank" class="guide-card fade-up" style="transition-delay:0.1s">
+        <div class="guide-tag">Housing</div>
+        <div class="guide-title">Finding housing without papers</div>
+        <div class="guide-desc">Official options, available aids, and what nobody tells you about the role of human relationships.</div>
+        <div class="guide-link">Read the guide →</div>
+      </a>
+      <a href="guides/pour-les-francais.pdf" target="_blank" class="guide-card fade-up" style="transition-delay:0.2s">
+        <div class="guide-tag">Community</div>
+        <div class="guide-title">For the French — how to really help</div>
+        <div class="guide-desc">What an immigrant honestly tells you — and what you can do concretely.</div>
+        <div class="guide-link">Read the guide →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- POUR LES FRANÇAIS -->
+<section class="pour-francais" id="francais">
+  <div class="section-inner">
+    <div class="section-label">For the French</div>
+    <h2 class="section-title fade-up" style="color:var(--green-deep)">You love your country. So do we.</h2>
+    <div class="francais-grid">
+      <div class="fade-up">
+        <div class="francais-quote">"What you do is exactly what we hope for." — What many French people regularly tell us.</div>
+        <p class="francais-body">This is not a compliment. It is a legitimate expectation that nobody takes seriously. You love your country. You worry about what is happening to it. Wanting those who come here to respect France — its laws, its language, its customs — is a normal expectation. We fully share it.</p>
+        <p class="francais-body"><strong style="color:var(--green-deep)">Sur la Bonne Voie only helps those who share these values.</strong> This is our commitment to you.</p>
+        <a href="#contact" class="btn-primary" style="background:var(--green-deep)">Contact us</a>
+      </div>
+      <div class="francais-actions fade-up" style="transition-delay:0.15s">
+        <div class="francais-action">
+          <div class="action-icon"></div>
+          <div class="action-text"><strong>Talk to your immigrant neighbors.</strong> A simple "hello" at the market can change everything for someone who feels invisible.</div>
+        </div>
+        <div class="francais-action">
+          <div class="action-icon"></div>
+          <div class="action-text"><strong>Share your knowledge.</strong> You know France better than anyone — one piece of advice can change a path.</div>
+        </div>
+        <div class="francais-action">
+          <div class="action-icon"></div>
+          <div class="action-text"><strong>Judge by actions, not by origins.</strong> An immigrant who works and learns French deserves the same respect as anyone else.</div>
+        </div>
+        <div class="francais-action">
+          <div class="action-icon"></div>
+          <div class="action-text"><strong>Send us</strong> any immigrant you know who wants to do things right. That's all we ask of you.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTRE HISTOIRE -->
+<section class="histoire" id="histoire">
+  <div class="section-inner">
+    <div class="section-label">Our Story</div>
+    <h2 class="section-title fade-up">We didn't come here to wait.</h2>
+    <div class="histoire-inner">
+      <div class="histoire-sidebar fade-up">
+        <div class="histoire-tag">Ardèche, France</div>
+        <div class="histoire-tag" style="margin-left:0.5rem">Since 2022</div>
+        <p class="histoire-sidebar-title" style="margin-top:1.25rem">"Sur la Bonne Voie was born from lived experience — not from an office, not from funding, not from theory."</p>
+      </div>
+      <div class="histoire-content fade-up" style="transition-delay:0.15s">
+        <p>We arrived in France without speaking a word of French, without contacts, without resources. Our asylum application was rejected. <strong>We did not wait for someone to come and save us.</strong></p>
+        <p>We learned French — up to B2+ level, certified, in less than two years, as self-learners. We built relationships in our village, organized events, and helped isolated immigrants recover a social life. We navigated hundreds of administrative procedures, met mayors, judges, and prefectures.</p>
+        <div class="histoire-pull">"We are still regularizing our own administrative situation. This means every guide we write comes from someone who is living the process today — not from someone who has already forgotten it."</div>
+        <p>Sur la Bonne Voie exists because this knowledge should not stay with us alone. And because waiting for permission to help others was never an option.</p>
+        <p><strong>Our papers are not yet final. Our integration is real.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="section-label">Contact Us</div>
+    <h2 class="section-title fade-up">Are you looking for your path in France?</h2>
+    <div class="contact-grid">
+      <div class="fade-up">
+        <p class="contact-desc">We help immigrants who want to integrate seriously — and French people who genuinely want to help. If that's your case, write to us. We reply to every message.</p>
+        <p class="contact-desc" style="font-size:0.9rem">Before contacting us, one important thing: <strong style="color:rgba(255,255,255,0.8)">we do not do the procedures for you.</strong> We give you the tools, advice, and support so you can do them yourself.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="84e7ebeaf0e5e7f0c4f7f1f6e8e5e6ebeaeae1f2ebede1aaebf6e3">[email&#160;protected]</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-label">Region</div>
+            <div class="contact-item-val">Aubenas, Ardèche (07)</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-label">Languages</div>
+            <div class="contact-item-val">French · Spanish · English</div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form fade-up" style="transition-delay:0.15s" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Your last name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>You are</label>
+          <select>
+            <option value="">Select...</option>
+            <option>An immigrant seeking help</option>
+            <option>A French person wanting to help</option>
+            <option>A partner organization</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your message</label>
+          <textarea placeholder="Describe your situation or your question..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send message →</button>
+        <p class="form-note">We reply within 48 hours. All shared information remains confidential.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Sur la <span>bonne voie</span></div>
+      <div class="footer-tagline">Association for real integration — Aubenas, Ardèche</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#guides">Guides</a></li>
+      <li><a href="#francais">For the French</a></li>
+      <li><a href="#histoire">Our Story</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Sur la Bonne Voie — surlabonnevoie.org</div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+  // Nav toggle
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // Fade up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = 'Message sent ✓';
+    btn.style.background = '#0F6E56';
+    setTimeout(() => { btn.textContent = 'Send message →'; btn.style.background = ''; }, 3000);
+  }
+</script>
+</body>
+</html>
