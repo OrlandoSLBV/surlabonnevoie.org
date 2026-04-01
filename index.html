@@ -831,54 +831,18 @@ body {
 </style>
 </head>
 <body>
-<!-- Language Switcher - Simple & Reliable -->
+<!-- Language Switcher - Links to all versions -->
 <div style="background-color: #f8f5f0; padding: 14px 20px; text-align: center; font-size: 15px; border-bottom: 2px solid #4A7043; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-  <strong style="color: #2C2C2C; margin-right: 12px;">Langue / Language :</strong>
+  <strong style="color: #2C2C2C; margin-right: 12px;">Langue / Language / Idioma / اللغة :</strong>
   
-  <a href="#" onclick="translatePage('fr'); return false;" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇫🇷 Français</a>
+  <a href="index.html" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇫🇷 Français</a>
   <span style="color: #aaa;"> | </span>
-  <a href="#" onclick="translatePage('en'); return false;" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇬🇧 English</a>
+  <a href="index-en.html" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇬🇧 English</a>
   <span style="color: #aaa;"> | </span>
-  <a href="#" onclick="translatePage('es'); return false;" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇪🇸 Español</a>
+  <a href="index-es.html" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇪🇸 Español</a>
   <span style="color: #aaa;"> | </span>
-  <a href="#" onclick="translatePage('ar'); return false;" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇲🇦 العربية</a>
+  <a href="index-ar.html" style="color: #4A7043; text-decoration: none; font-weight: 600; margin: 0 8px;">🇲🇦 العربية</a>
 </div>
-
-<!-- Google Translate (hidden) -->
-<div id="google_translate_element" style="display: none;"></div>
-
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'fr',
-    includedLanguages: 'en,es,ar',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-    autoDisplay: false
-  }, 'google_translate_element');
-}
-
-function translatePage(lang) {
-  if (lang === 'fr') {
-    location.reload();
-    return;
-  }
-
-  const te = document.getElementById('google_translate_element');
-  if (!te) return;
-
-  // Wait a bit for Google script to fully load the dropdown
-  setTimeout(() => {
-    const select = te.querySelector('select.goog-te-combo');
-    if (select) {
-      select.value = lang;
-      select.dispatchEvent(new Event('change'));
-    }
-  }, 600);   // 600ms delay usually fixes it
-}
-</script>
-
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<!-- NAV -->
 <nav>
   <a href="#accueil" class="nav-logo">Sur la <span>bonne voie</span></a>
   <ul class="nav-links" id="navLinks">
