@@ -441,13 +441,6 @@ Contact: contact@surlabonnevoie.org | Aubenas, Ardèche`;
     const text = input.value.trim();
     if (!text || isTyping) return;
 
-    // Check API key
-    const apiKey = window.SLBV_API_KEY;
-    if (!apiKey) {
-      appendMessage('bot', '⚠️ API key not configured. Set window.SLBV_API_KEY before the script tag.');
-      return;
-    }
-
     // Add user message
     appendMessage('user', text);
     messages.push({ role: 'user', content: text });
@@ -460,13 +453,10 @@ Contact: contact@surlabonnevoie.org | Aubenas, Ardèche`;
     showTyping();
 
     try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('https://slbv-proxy.surlabonnevoiefr.workers.dev', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
         },
         body: JSON.stringify({
           model: 'claude-haiku-4-5-20251001',
